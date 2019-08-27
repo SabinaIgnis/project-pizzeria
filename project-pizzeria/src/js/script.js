@@ -104,9 +104,9 @@
     initAccordion(){
       const thisProduct = this;
       /* find the clickable trigger (the element that should react to clicking) */
-      const element = thisProduct.querySelector(select.menuProduct.clickable);
+      let trigger = thisProduct.element.querySelector(select.menuProduct.clickable);
       /* START: click event listener to trigger */
-      element.addEventListener('click', function(event){
+      trigger.addEventListener('click', function(){
         /* prevent default action for event */
         event.preventDefault();
         /* toggle active class on element of thisProduct */
