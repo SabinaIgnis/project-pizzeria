@@ -53,6 +53,19 @@
   };
 
   const app = {
+    initMenu: function(){
+      const thisApp= this;
+      console.log('thisApp.data:', thisApp.data);
+
+      for (let productData in thisApp.data.products){
+        new Product(productData, thisApp.data.products[productData]);
+      }
+    },
+    initData: function(){
+      const thisApp = this;
+
+      thisApp.data = dataSource;
+    },
     init: function(){
       const thisApp = this;
       console.log('*** App starting ***');
@@ -60,8 +73,60 @@
       console.log('classNames:', classNames);
       console.log('settings:', settings);
       console.log('templates:', templates);
+      thisApp.initData();
+      thisApp.initMenu();
     },
   };
+  class Product{
+    constructor(id, data){
+      const thisProduct = this;
+
+      thisProduct.id = id;
+      thisProduct.data = data;
+
+      thisProduct.renderInMenu();
+      thisProduct.initAccordion();
+
+      console.log('new Product:', thisProduct);
+    }
+    renderInMenu(){
+      const thisProduct = this;
+
+      /* generate HTML based on template */
+      const generatedHTML = templates.menuProduct(thisProduct.data);
+      /* create element usingutils.createElementFromHTML */
+      thisProduct.element = utils.createDOMFromHTML(generatedHTML);
+      /* find menu container */
+      const menuContainer = document.querySelector(select.containerOf.menu);
+      /* add element to menu */
+      menuContainer.appendChild(thisProduct.element);
+    }
+    initAccordion(){
+      const thisProduct = this;
+      /* find the clickable trigger (the element that should react to clicking) */
+      const element = thisProduct.querySelector(select.menuProduct.clickable);
+      /* START: click event listener to trigger */
+      element.addEventListener('click', function(event){
+        /* prevent default action for event */
+        event.preventDefault();
+        /* toggle active class on element of thisProduct */
+        thisProduct.element.classList.add('active');
+        /* find all active products */
+        const activeProducts = document.querySelectorAll(select.all.menuProductsActive);
+        /* START LOOP: for each active product */
+        for (let activeProduct of activeProducts){
+          /* START: if the active product isn't the element of thisProduct */
+          if (activeProduct !== thisProduct.element){
+            /* remove class active for the active product */
+            activeProduct.classList.remove('active');
+          /* END: if the active product isn't the element of thisProduct */
+          }
+        /* END LOOP: for each active product */
+        }
+      /* END: click event listener to trigger */
+      });
+    }
+  }
 
   app.init();
 }
