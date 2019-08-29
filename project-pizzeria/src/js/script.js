@@ -114,7 +114,7 @@
       thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
       thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
-
+      thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
       }
 
     initAccordion(){
@@ -187,6 +187,26 @@
             /* deduct price of option from price */
             price = price - option.price;
           }
+          /* find all the images for this option */
+          const images = thisProduct.imageWrapper.querySelectorAll('.paramId-optionId');
+          
+          /* START if for all option selected images */
+          if (optionSelected){
+            /* START  FOR all those images for option selcted */
+            for (let image of images){
+            /* Add class active to those images */
+            image.claassNames.menuProduct.imageVisable.add('active');
+            /* end FOR AND if */
+            } }
+          /* START ELSE for those images not selected */
+          else {
+            /* START FOR those images not selceted */
+            for (let  image of images){
+            /* remove class active from tjose images */
+            image.claassNames.menuProduct.imageVisable.remove('active');
+          /* END FOR and ELSE */
+        }}
+
           /* END ELSE IF: if option is not selected and option is default */
         }
         /* END LOOP: for each optionId in param.options */
