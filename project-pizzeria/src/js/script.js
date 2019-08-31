@@ -260,7 +260,7 @@
     setValue(value){
       const thisWidget = this;
       const newValue = parseInt(value);
-      if (thisWidget.value !== newValue && newValue >= settings.amountWidget.defaultMin && newValue <= settings.amountWidget.defaultMin){
+      if(newValue !== thisWidget.value && newValue >= settings.amountWidget.defaultMin && newValue <= settings.amountWidget.defaultMax){
 
 
         thisWidget.value = newValue;
