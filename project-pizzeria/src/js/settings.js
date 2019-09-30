@@ -1,4 +1,4 @@
-import Handlebars from 'handlebars';
+/* global Handlebars */
 
 export const select = {
   templateOf: {
