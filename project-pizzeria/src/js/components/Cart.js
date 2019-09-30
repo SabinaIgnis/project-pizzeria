@@ -1,9 +1,9 @@
 import {settings, select, templates, classNames} from './settings.js';
-import Utils from './utils.js';
+import utils from './utils.js';
 import CartProduct from './components/CartProduct.js';
 
 
- class Cart{
+class Cart{
   constructor(element){
     const thisCart = this;
 
@@ -115,7 +115,7 @@ import CartProduct from './components/CartProduct.js';
       .then(function(response){
         return response.json();
       }).then(function(parsedResponse){
-        console.log('parsedResponse', parsedResponse)
+        console.log('parsedResponse', parsedResponse);
       });
 
   }
