@@ -13,8 +13,19 @@ const app = {
     thisApp.pages = document.querySelector(select.conteinerOf.pages).children;
     thisApp.navLinks = document.querySelectorAll(select.nav.links);
 
+    const idFromHash = window.location.hash.replace('#/', '');
 
-    thisApp.activatePage(window.location.hash.replace('#/', ''));
+    let pageMatchingHash = thisApp.pages[0].id;
+
+
+    for (let page of thisApp.pages){
+      if (page.id == idFromHash){
+        pageMatchingHash = page.id;
+        break;
+      }
+    }
+
+    thisApp.activatePage(pageMatchingHash);
 
     for(let link of thisApp.navLinks){
       link.addEventListener('click', function(event){
